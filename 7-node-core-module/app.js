@@ -46,27 +46,13 @@
 // });
 
 // // Chalenge
+const { tulisPertanyaan, simpanContacts } = require("./contacts");
 
-const fs = require("fs");
-const readline = require("readline");
+const main = async () => {
+  const nama = await tulisPertanyaan("Masukan nama anda : ");
+  const email = await tulisPertanyaan("Masukan email anda : ");
+  const noHp = await tulisPertanyaan("Masukan noHp anda : ");
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-});
-
-rl.question("Masukan Nama Anda: ", (nama) => {
-  rl.question("Masukan Nomer Hp Anda: ", (noHp) => {
-    const contact = { nama, noHp };
-    fs.readFile("data/contacts.json", "utf-8", (error, file) => {
-      if (error) throw error;
-      const contacts = JSON.parse(file);
-      contacts.push(contact);
-      fs.writeFile("data/contacts.json", JSON.stringify(contacts), (error) => {
-        if (error) throw error;
-        console.log("Terima Kasih Data Sudah Kami Simpan.");
-      });
-    });
-    rl.close();
-  });
-});
+  simpanContacts(nama, email, noHp);
+};
+main();

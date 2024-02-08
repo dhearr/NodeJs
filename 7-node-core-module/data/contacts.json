@@ -1,5 +1,4 @@
 [
-  { "nama": "Dhea Ramdani", "noHp": "08912345678" },
-  { "nama": "Afani Akhira", "noHp": "08987654321" },
-  { "nama": "Luffy", "noHp": "08912387645" }
+  { "nama": "Dhea Ramdani", "email": "dhea@gmail.com", "noHp": "08123456789" },
+  { "nama": "Afani Akhira", "email": "afani@gmail.com", "noHp": "08987654321" }
 ]
