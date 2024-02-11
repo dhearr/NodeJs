@@ -1,7 +1,21 @@
 <div class="container mt-3">
   <div class="row">
     <div class="col-md-8">
-      <h2>Daftar Contact</h2>
+      <h2 class="mb-5">Daftar Contact</h2>
+      <a href="/contact/add" class="btn btn-primary mb-2"
+        ><i class="bi bi-plus-lg"></i> Add Contact</a
+      >
+      <% if (message.length !== 0) { %>
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <%= message %>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+      <% } %>
       <table class="table">
         <thead>
           <tr>
