@@ -13,11 +13,9 @@ const { body, validationResult, check } = require("express-validator");
 const app = express();
 const port = 3000;
 
-// Make EJS
+// Build Middleware
 app.set("view engine", "ejs");
 app.use(expressLayouts);
-
-// Build Middleware
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 
