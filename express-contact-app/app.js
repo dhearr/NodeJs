@@ -128,7 +128,7 @@ app.get("/contact/:name", (req, res) => {
   });
 });
 
-// error page
+// Error Page
 app.use("/", (req, res) => {
   res.status(404);
   res.send(`<h1>404 : Not Found!</h1>`);
