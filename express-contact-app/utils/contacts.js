@@ -48,4 +48,29 @@ const cekDuplicated = (name) => {
   );
 };
 
-module.exports = { loadContacts, findContact, addContact, cekDuplicated };
+// Delete Contact
+const deleteContact = (name) => {
+  const contacts = loadContacts();
+  const filteredContacts = contacts.filter((contact) => contact.name !== name);
+  saveContacts(filteredContacts);
+};
+
+// Edit / Update Contact
+const updateContacts = (newContact) => {
+  const contacts = loadContacts();
+  const filteredContacts = contacts.filter(
+    (contact) => contact.name !== newContact.oldName
+  );
+  delete newContact.oldName;
+  filteredContacts.push(newContact);
+  saveContacts(filteredContacts);
+};
+
+module.exports = {
+  loadContacts,
+  findContact,
+  addContact,
+  cekDuplicated,
+  deleteContact,
+  updateContacts,
+};

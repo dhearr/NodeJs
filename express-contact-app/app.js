@@ -8,6 +8,8 @@ const {
   findContact,
   addContact,
   cekDuplicated,
+  deleteContact,
+  updateContacts,
 } = require("./utils/contacts");
 const { body, validationResult, check } = require("express-validator");
 const app = express();
@@ -113,6 +115,70 @@ app.post(
         "Contact data successfully added, have a nice day :)"
       );
       // redirect
+      res.redirect("/contact");
+    }
+  }
+);
+
+// Proccess Delete Contact
+app.get("/contact/delete/:name", (req, res) => {
+  const contact = findContact(req.params.name);
+  // cek kondisi
+  if (!contact) {
+    res.status(404);
+    res.send(`<h1>404 : Not Found!</h1>`);
+  } else {
+    deleteContact(req.params.name);
+    req.flash(
+      "message",
+      "Contact data successfully deleted, have a nice day :)"
+    );
+    res.redirect("/contact");
+  }
+});
+
+// Page Edit Contact
+app.get("/contact/edit/:name", (req, res) => {
+  const contact = findContact(req.params.name);
+
+  res.render("edit-contact", {
+    layout: "layouts/main-layout",
+    title: "Edit Contact Page",
+    contact,
+  });
+});
+
+// Proses Edit Contact
+app.post(
+  "/contact/update",
+  [
+    body("name").custom((value, { req }) => {
+      const duplicated = cekDuplicated(value);
+      if (value !== req.body.oldName && duplicated) {
+        throw new Error("Name already exists / registered, use another name.");
+      }
+      return true;
+    }),
+    check("email", "Invalid email!").isEmail(),
+    check("phone", "Invalid phone number!").isMobilePhone("id-ID"),
+  ],
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      // return res.status(400).json({ errors: errors.array() });
+      res.render("edit-contact", {
+        layout: "layouts/main-layout",
+        title: "Edit Contact Page",
+        errors: errors.array(),
+        contact: req.body,
+      });
+    } else {
+      updateContacts(req.body);
+      // send flash message
+      req.flash(
+        "message",
+        "Contact data successfully updated, have a nice day :)"
+      );
       res.redirect("/contact");
     }
   }
