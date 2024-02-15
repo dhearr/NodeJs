@@ -55,7 +55,7 @@ const deleteContact = (name) => {
   saveContacts(filteredContacts);
 };
 
-// Edit / Update Contact
+// Edit or Update Contact
 const updateContacts = (newContact) => {
   const contacts = loadContacts();
   const filteredContacts = contacts.filter(
