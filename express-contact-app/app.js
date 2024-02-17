@@ -84,7 +84,7 @@ app.get("/contact/add", (req, res) => {
   });
 });
 
-// Proses Data Form
+// Proses Add Data Form
 app.post(
   "/contact",
   [

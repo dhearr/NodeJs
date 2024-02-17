@@ -20,12 +20,21 @@
           <a href="/contact/edit/<%= contact.name %>" class="btn btn-info badge"
             >Edit</a
           >
-          <a
+          <!-- <a
             href="/contact/delete/<%= contact.name %>"
             class="btn btn-danger badge"
             onclick="return confirm('Are you sure?')"
             >Delete</a
-          >
+          > -->
+          <form action="/contact?_method=DELETE" method="POST" class="d-inline">
+            <input type="hidden" name="_id" value="<%= contact._id %>" />
+            <button
+              class="btn btn-danger badge"
+              onclick="return confirm('Are you sure?')"
+            >
+              Delete
+            </button>
+          </form>
           <a href="/contact" class="card-link d-block mt-3"
             >&laquo; Back to list contact</a
           >
